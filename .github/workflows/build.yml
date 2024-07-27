@@ -1,19 +1,14 @@
+---
 name: build
-
 on:
- push:
-  branches:
-   -build
-
+  push:
+    branches: -build
 jobs:
- build:
-  runs-on: self-hosted
-  steps:
-   -name: checkout code
-   -uses: actions/checkout@v2
-    -runs: echo "start"
-     pmrep connect -r DEV_REP -d DOM_DEV -n om -x om
-     echo "Exporting workflow:"
-     pmrep objectexport -n wf_first_workflow -o workflow -f Original -m -s -b -r -u C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml
-     
-     
+  build:
+    runs-on: self-hosted
+    steps:
+      -name: checkout code
+      -uses: >-
+        actions/checkout@v2
+
+        pmrep connect -r DEV_REP -d DOM_DEV -n om -x om echo "Exporting workflow:" pmrep objectexport -n wf_first_workflow -o workflow -f Original -m -s -b -r -u C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml
