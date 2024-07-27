@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Informatica CLI
+      - name: Connecting to Informatica Repository
         run: |
           # Assuming pmrep is available on your self-hosted runner and in PATH
           echo "Connecting to Informatica Repository"
