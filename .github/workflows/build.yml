@@ -1,14 +1,25 @@
----
-name: build
+name: Build
+
 on:
   push:
-    branches: -build
+    branches:
+      - build
+
 jobs:
   build:
     runs-on: self-hosted
-    steps:
-      -name: checkout code
-      -uses: >-
-        actions/checkout@v2
 
-        pmrep connect -r DEV_REP -d DOM_DEV -n om -x om echo "Exporting workflow:" pmrep objectexport -n wf_first_workflow -o workflow -f Original -m -s -b -r -u C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Informatica CLI
+        run: |
+          # Assuming pmrep is available on your self-hosted runner and in PATH
+          echo "Connecting to Informatica Repository"
+          pmrep connect -r DEV_REP -d DOM_DEV -n ${{ secrets.INFORMATICA_USER }} -x ${{ secrets.INFORMATICA_PASSWORD }}
+
+      - name: Export workflow
+        run: |
+          echo "Exporting workflow:"
+          pmrep objectexport -n wf_first_workflow -o workflow -f Original -m -s -b -r -u /path/to/export/wf_first_workflow.xml
