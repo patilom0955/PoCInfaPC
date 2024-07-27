@@ -17,13 +17,7 @@ jobs:
         run: |
           # Assuming pmrep is available on your self-hosted runner and in PATH
           cd C:\Informatica\9.6.1\server\bin
-          pwd
           echo "Connecting to Informatica Repository"
           pmrep connect -r DEV_REP -d DOM_DEV -n om -x om
-
-      - name: Export workflow
-        run: |
-          echo "Exporting workflow:"
-          pwd
           pmrep objectexport -n wf_first_workflow -o workflow -f Original -m -s -b -r -u C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml
-
+          
