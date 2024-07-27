@@ -17,7 +17,7 @@ jobs:
         run: |
           # Assuming pmrep is available on your self-hosted runner and in PATH
           echo "Connecting to Informatica Repository"
-          pmrep connect -r DEV_REP -d DOM_DEV -n ${{ secrets.INFORMATICA_USER }} -x ${{ secrets.INFORMATICA_PASSWORD }}
+          pmrep connect -r DEV_REP -d DOM_DEV -n om -x om
 
       - name: Export workflow
         run: |
