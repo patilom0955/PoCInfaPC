@@ -7,10 +7,10 @@ on:
 
 jobs:
  build:
-  runs-on:self-hosted
+  runs-on: self-hosted
   steps:
    - name: checkout code
-   uses: actions/checkout@v2
+    uses: actions/checkout@v2
 
     - name: Run Iformatica Powercenter Utility
     run: | echo "connetcing to  informatica repository" 
