@@ -1,0 +1,27 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - deploy
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Informatica CLI
+        run: |
+          # Change directory
+          cd C:\Informatica\9.6.1\server\bin
+          
+          # Connect to Informatica Repository
+          echo "Connecting to Informatica Repository"
+          pmrep connect -r ${{ secrets.INFORMATICA_REPOSITORY }} -d ${{ secrets.INFORMATICA_DOMAIN }} -n ${{ secrets.INFORMATICA_USERNAME }} -x ${{ secrets.INFORMATICA_PASSWORD }}
+          
+          # Deploy workflow
+          echo "Deploying workflow"
+          pmrep ObjectImport -i C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml -c C:\Informatica\9.6.1\server\bin\control_file.txt
