@@ -21,3 +21,23 @@ jobs:
           pmrep connect -r DEV_REP -d DOM_DEV -n om -x om
           pmrep objectexport -n wf_first_workflow -o workflow -f Original -m -s -b -r -u C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml
           
+  deploy:
+    runs-on: self-hosted
+    needs: build  # This ensures the deploy job runs only after the build job completes
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Informatica CLI
+        run: |
+          # Change directory
+          cd C:\Informatica\9.6.1\server\bin
+          
+          # Connect to Informatica Repository
+          echo "Connecting to Informatica Repository"
+          pmrep connect -r ${{ secrets.INFORMATICA_REPOSITORY }} -d ${{ secrets.INFORMATICA_DOMAIN }} -n ${{ secrets.INFORMATICA_USERNAME }} -x ${{ secrets.INFORMATICA_PASSWORD }}
+          
+          # Deploy workflow
+          echo "Deploying workflow"
+          pmrep ObjectImport -i C:\Users\infa_admin\Desktop\export\wf_first_workflow.xml -c C:\Informatica\9.6.1\server\bin\control_file.txt
