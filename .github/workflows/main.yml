@@ -36,7 +36,7 @@ jobs:
           
           # Connect to Informatica Repository
           echo "Connecting to Informatica Repository"
-          pmrep connect -r ${{ secrets.INFORMATICA_REPOSITORY }} -d ${{ secrets.INFORMATICA_DOMAIN }} -n ${{ secrets.INFORMATICA_USERNAME }} -x ${{ secrets.INFORMATICA_PASSWORD }}
+          pmrep connect -r DEV_REP -d DOM_DEV -n om -x om
           
           # Deploy workflow
           echo "Deploying workflow"
